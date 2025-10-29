@@ -136,6 +136,7 @@
 
         // Generar QR
         function generarQR(userId) {
+            debugger;
             const updateUrl = `${window.location.origin}${window.location.pathname.replace('registro.html', 'lista.html')}?actualizar=${userId}`;
             
             $('#qrcode').empty();

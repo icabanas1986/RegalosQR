@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Registro con QR</title>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .container { max-width: 500px; width: 100%; text-align: center; }
+        .card { background: white; border-radius: 20px; padding: 50px 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .logo { font-size: 4rem; margin-bottom: 20px; }
+        .title { font-size: 2.2rem; font-weight: 700; color: #2d3748; margin-bottom: 15px; }
+        .subtitle { color: #718096; font-size: 1.1rem; margin-bottom: 40px; line-height: 1.6; }
+        .btn { display: block; width: 100%; padding: 18px; margin: 15px 0; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; text-decoration: none; text-align: center; }
+        .btn-primary { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4); }
+        .btn-secondary { background: #f7fafc; color: #4a5568; border: 2px solid #e2e8f0; }
+        .btn-secondary:hover { background: #edf2f7; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="logo">📋</div>
+            <h1 class="title">Sistema de Registro</h1>
+            <p class="subtitle">
+                Sistema completo con base de datos en la nube
+            </p>
+            
+            <a href="registro.html" class="btn btn-primary">
+                📝 Comenzar a Registrar
+            </a>
+            
+            <a href="lista.html" class="btn btn-secondary">
+                👥 Ver Lista de Usuarios
+            </a>
+        </div>
+    </div>
+
+    <!-- Firebase Configuration -->
+    <script>
+        // CONFIGURA ESTO CON TUS DATOS DE FIREBASE
+        const firebaseConfig = {
+            apiKey: "AIzaSyDXWCaRziv_QnmAmylZsWrroCyQjVRv3o0",
+            authDomain: "sistema-registro-qr.firebaseapp.com",
+            projectId: "sistema-registro-qr",
+            storageBucket: "sistema-registro-qr.firebasestorage.app",
+            messagingSenderId: "927176474405",
+            appId: "1:927176474405:web:16002148918ebb34c924cc"
+        };
+        
+        // Inicializar Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+    </script>
+</body>
+</html>

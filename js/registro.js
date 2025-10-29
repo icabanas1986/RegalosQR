@@ -1,74 +1,47 @@
-// Clave para localStorage
-        const STORAGE_KEY = 'usuarios_registrados';
-
-        // Inicializar la aplicación
-        $(document).ready(function() {
-            // Enter key en el input
-            $('#nombre').keypress(function(e) {
-                if (e.which === 13) {
-                    registrarUsuario();
-                }
-            });
-        });
-
-        // Generar ID único
-        function generarId() {
-            return 'USER_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-        }
-
-        // Registrar nuevo usuario
-        function registrarUsuario() {
+// URL de tu Google Apps Script (REEMPLAZA ESTA URL)
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwToUIvEM25C5yTq61ZpBEOCqv8jkWGiA-r3eOMNXpulfS3Yt-A96A7LsaE8FByITp6Vg/exec';
+        
+        // Función para registrar usuario
+        async function registrarUsuario() {
             const nombre = $('#nombre').val().trim();
+            const btnRegistrar = $('#btnRegistrar');
+            const loading = $('#loading');
             
             if (!nombre) {
-                alert('Por favor ingrese un nombre completo');
+                mostrarNotificacion('Por favor ingrese un nombre completo', 'error');
                 return;
             }
 
-            // Crear objeto usuario
-            const usuario = {
-                id: generarId(),
-                nombre: nombre,
-                fechaRegistro: new Date().toISOString(),
-                fechaActualizacion: new Date().toISOString(),
-                estatus: 'Pendiente'
-            };
+            // Mostrar loading
+            btnRegistrar.prop('disabled', true);
+            loading.show();
 
-            // Guardar en localStorage
-            guardarUsuario(usuario);
-            
-            // Generar y mostrar QR
-            generarQR(usuario.id);
-            
-            // Limpiar formulario
-            $('#nombre').val('');
-            
-            // Mostrar notificación
-            mostrarNotificacion('Usuario registrado exitosamente!', 'success');
+            try {
+                const response = await fetch(`${SCRIPT_URL}?action=registrar&nombre=${encodeURIComponent(nombre)}`);
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    generarQR(data.data.id);
+                    $('#nombre').val('');
+                    mostrarNotificacion('Usuario registrado exitosamente!', 'success');
+                } else {
+                    throw new Error(data.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                mostrarNotificacion('Error al registrar usuario: ' + error.message, 'error');
+            } finally {
+                btnRegistrar.prop('disabled', false);
+                loading.hide();
+            }
         }
 
-        // Guardar usuario en localStorage
-        function guardarUsuario(usuario) {
-            let usuarios = obtenerUsuarios();
-            usuarios.push(usuario);
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(usuarios));
-        }
-
-        // Obtener todos los usuarios
-        function obtenerUsuarios() {
-            const usuarios = localStorage.getItem(STORAGE_KEY);
-            return usuarios ? JSON.parse(usuarios) : [];
-        }
-
-        // Generar QR con URL para actualizar estado
+        // Generar QR
         function generarQR(userId) {
-            // Crear URL que actualizará el estado al ser escaneada
             const updateUrl = `${window.location.origin}${window.location.pathname.replace('registro.html', 'lista.html')}?actualizar=${userId}`;
             
-            // Limpiar contenedor QR
             $('#qrcode').empty();
             
-            // Generar QR
             try {
                 const qrcode = new QRCode(document.getElementById("qrcode"), {
                     text: updateUrl,
@@ -79,10 +52,7 @@
                     correctLevel: QRCode.CorrectLevel.H
                 });
                 
-                // Mostrar sección QR
                 $('#qrSection').show();
-                
-                // Guardar URL actualización para descarga
                 window.currentQRUrl = updateUrl;
                 window.currentUserId = userId;
                 
@@ -92,7 +62,7 @@
             }
         }
 
-        // Método alternativo para generar QR
+        // Resto de funciones permanecen igual...
         function generarQRAlternativo(url) {
             $('#qrcode').empty();
             const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(url)}`;
@@ -103,7 +73,6 @@
             $('#qrSection').show();
         }
 
-        // Descargar QR como imagen
         function descargarQR() {
             const canvas = document.querySelector('#qrcode canvas');
             if (canvas) {
@@ -117,9 +86,7 @@
             }
         }
 
-        // Mostrar notificación
         function mostrarNotificacion(mensaje, tipo) {
-            // Crear elemento de notificación
             const notificacion = document.createElement('div');
             notificacion.style.cssText = `
                 position: fixed;
@@ -138,16 +105,16 @@
             notificacion.textContent = mensaje;
             document.body.appendChild(notificacion);
             
-            // Animación de entrada
-            setTimeout(() => {
-                notificacion.style.transform = 'translateX(0)';
-            }, 100);
-            
-            // Remover después de 3 segundos
+            setTimeout(() => notificacion.style.transform = 'translateX(0)', 100);
             setTimeout(() => {
                 notificacion.style.transform = 'translateX(100%)';
-                setTimeout(() => {
-                    document.body.removeChild(notificacion);
-                }, 300);
+                setTimeout(() => document.body.removeChild(notificacion), 300);
             }, 3000);
         }
+
+        // Enter key
+        $(document).ready(function() {
+            $('#nombre').keypress(function(e) {
+                if (e.which === 13) registrarUsuario();
+            });
+        });

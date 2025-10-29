@@ -7,162 +7,31 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 500px;
-            width: 100%;
-        }
-
-        .card {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-
-        .logo {
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-
-        .title {
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: #2d3748;
-            margin-bottom: 10px;
-        }
-
-        .subtitle {
-            color: #718096;
-            margin-bottom: 30px;
-            font-size: 1rem;
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-            text-align: left;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: #4a5568;
-            font-size: 0.9rem;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 15px 20px;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-
-        .btn {
-            padding: 15px 30px;
-            border: none;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
-        }
-
-        .btn-secondary {
-            background: #f7fafc;
-            color: #4a5568;
-            border: 2px solid #e2e8f0;
-            margin-top: 10px;
-        }
-
-        .btn-secondary:hover {
-            background: #edf2f7;
-        }
-
-        .qr-section {
-            margin-top: 30px;
-            display: none;
-        }
-
-        .qr-container {
-            display: inline-block;
-            padding: 25px;
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            margin: 20px 0;
-        }
-
-        .qr-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #2d3748;
-            margin-bottom: 15px;
-        }
-
-        .qr-instructions {
-            color: #718096;
-            margin: 15px 0;
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        .nav-links {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #e2e8f0;
-        }
-
-        .nav-link {
-            display: inline-block;
-            padding: 10px 20px;
-            background: #f7fafc;
-            color: #667eea;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .nav-link:hover {
-            background: #667eea;
-            color: white;
-        }
+        /* Mantén los mismos estilos que tenías */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .container { max-width: 500px; width: 100%; }
+        .card { background: white; border-radius: 20px; padding: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); text-align: center; }
+        .logo { font-size: 3rem; margin-bottom: 20px; }
+        .title { font-size: 1.8rem; font-weight: 600; color: #2d3748; margin-bottom: 10px; }
+        .subtitle { color: #718096; margin-bottom: 30px; font-size: 1rem; }
+        .form-group { margin-bottom: 25px; text-align: left; }
+        .form-label { display: block; margin-bottom: 8px; font-weight: 500; color: #4a5568; font-size: 0.9rem; }
+        .form-input { width: 100%; padding: 15px 20px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 1rem; transition: all 0.3s ease; }
+        .form-input:focus { outline: none; border-color: #667eea; box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1); }
+        .btn { padding: 15px 30px; border: none; border-radius: 12px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; width: 100%; }
+        .btn-primary { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4); }
+        .btn-secondary { background: #f7fafc; color: #4a5568; border: 2px solid #e2e8f0; margin-top: 10px; }
+        .btn-secondary:hover { background: #edf2f7; }
+        .qr-section { margin-top: 30px; display: none; }
+        .qr-container { display: inline-block; padding: 25px; background: white; border-radius: 16px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); margin: 20px 0; }
+        .qr-title { font-size: 1.2rem; font-weight: 600; color: #2d3748; margin-bottom: 15px; }
+        .qr-instructions { color: #718096; margin: 15px 0; font-size: 0.9rem; line-height: 1.5; }
+        .nav-links { margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0; }
+        .nav-link { display: inline-block; padding: 10px 20px; background: #f7fafc; color: #667eea; text-decoration: none; border-radius: 8px; font-weight: 500; transition: all 0.3s ease; }
+        .nav-link:hover { background: #667eea; color: white; }
+        .loading { display: none; color: #667eea; margin: 10px 0; }
     </style>
 </head>
 <body>
@@ -177,7 +46,9 @@
                 <input type="text" id="nombre" class="form-input" placeholder="Ingrese el nombre completo" required>
             </div>
             
-            <button class="btn btn-primary" onclick="registrarUsuario()">
+            <div class="loading" id="loading">Registrando usuario...</div>
+            
+            <button class="btn btn-primary" onclick="registrarUsuario()" id="btnRegistrar">
                 Registrar y Generar QR
             </button>
 
@@ -195,9 +66,9 @@
                 </button>
             </div>
 
-            <!-- <div class="nav-links">
+            <div class="nav-links">
                 <a href="lista.html" class="nav-link">📋 Ver Lista de Usuarios</a>
-            </div> -->
+            </div>
         </div>
     </div>
     <script src="js/registro.js"></script>

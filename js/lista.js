@@ -1,7 +1,8 @@
 // URL de tu Google Apps Script (REEMPLAZA ESTA URL)
-        const SCRIPT_URL = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(
-    'https://script.google.com/macros/s/AKfycbwToUIvEM25C5yTq61ZpBEOCqv8jkWGiA-r3eOMNXpulfS3Yt-A96A7LsaE8FByITp6Vg/exec');
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwToUIvEM25C5yTq61ZpBEOCqv8jkWGiA-r3eOMNXpulfS3Yt-A96A7LsaE8FByITp6Vg/exec';
+        
 
+        
         let usuarios = [];
 
         // Inicializar

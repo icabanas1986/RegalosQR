@@ -261,6 +261,11 @@
                                 '<span style="color: #718096; font-size: 0.8rem;">Completado</span>'
                             }
                         </td>
+                        <td>
+                            <button class="action-btn eliminar" onclick="eliminarUsuario('${usuario.id}', '${usuario.nombre}')">
+                                🗑️ Eliminar
+                                </button>
+                            </td>
                     </tr>
                 `;
             });
@@ -336,6 +341,19 @@
                 setTimeout(() => document.body.removeChild(notificacion), 300);
             }, 3000);
         }
+
+        async function eliminarUsuario(userId, userName) {
+    if (confirm(`¿Estás seguro de eliminar a ${userName}?`)) {
+        try {
+            await db.collection('usuarios').doc(userId).delete();
+            mostrarNotificacion('Usuario eliminado exitosamente', 'success');
+            cargarUsuarios();
+        } catch (error) {
+            console.error('Error:', error);
+            mostrarNotificacion('Error al eliminar usuario', 'error');
+        }
+    }
+}
         // ... [copia las mismas funciones que tenías antes para la vista]
     </script>
 </body>
